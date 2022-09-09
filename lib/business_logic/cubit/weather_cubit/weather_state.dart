@@ -1,14 +1,18 @@
 part of 'weather_cubit.dart';
 
 @immutable
-abstract class WeatherState {}
+abstract class WeatherStates {}
 
-class WeatherInitial extends WeatherState {}
+class WeatherInitial extends WeatherStates {}
 
-class GetWeatherDataLoadingState extends WeatherState {}
+class GetWeatherDataLoadingState extends WeatherStates {}
 
-class GetWeatherDataSuccessState extends WeatherState {}
+class GetWeatherDataSuccessState extends WeatherStates {
+  final String location;
 
-class GetWeatherDataEmptyState extends WeatherState {}
+  GetWeatherDataSuccessState(this.location);
+}
 
-class GetWeatherDataErrorState extends WeatherState {}
+class GetWeatherDataEmptyState extends WeatherStates {}
+
+class GetWeatherDataErrorState extends WeatherStates {}

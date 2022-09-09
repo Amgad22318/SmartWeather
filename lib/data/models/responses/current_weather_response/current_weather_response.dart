@@ -7,33 +7,6 @@ String currentWeatherResponseToJson(CurrentWeatherResponse data) =>
 
 class CurrentWeatherResponse {
   CurrentWeatherResponse({
-    Current? current,
-  }) {
-    _current = current;
-  }
-
-  CurrentWeatherResponse.fromJson(dynamic json) {
-    _current =
-        json['current'] != null ? Current.fromJson(json['current']) : null;
-  }
-  Current? _current;
-
-  Current? get current => _current;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_current != null) {
-      map['current'] = _current?.toJson();
-    }
-    return map;
-  }
-}
-
-Current currentFromJson(String str) => Current.fromJson(json.decode(str));
-String currentToJson(Current data) => json.encode(data.toJson());
-
-class Current {
-  Current({
     int? lastUpdatedEpoch,
     String? lastUpdated,
     double? tempC,
@@ -83,7 +56,7 @@ class Current {
     _gustKph = gustKph;
   }
 
-  Current.fromJson(dynamic json) {
+  CurrentWeatherResponse.fromJson(dynamic json) {
     _lastUpdatedEpoch = json['last_updated_epoch'];
     _lastUpdated = json['last_updated'];
     _tempC = json['temp_c'];
@@ -134,29 +107,29 @@ class Current {
   double? _gustMph;
   double? _gustKph;
 
-  int? get lastUpdatedEpoch => _lastUpdatedEpoch;
-  String? get lastUpdated => _lastUpdated;
-  double? get tempC => _tempC;
-  double? get tempF => _tempF;
-  int? get isDay => _isDay;
-  Condition? get condition => _condition;
-  double? get windMph => _windMph;
-  double? get windKph => _windKph;
-  int? get windDegree => _windDegree;
-  String? get windDir => _windDir;
-  double? get pressureMb => _pressureMb;
-  double? get pressureIn => _pressureIn;
-  double? get precipMm => _precipMm;
-  double? get precipIn => _precipIn;
-  int? get humidity => _humidity;
-  int? get cloud => _cloud;
-  double? get feelslikeC => _feelslikeC;
-  double? get feelslikeF => _feelslikeF;
-  double? get visKm => _visKm;
-  double? get visMiles => _visMiles;
-  double? get uv => _uv;
-  double? get gustMph => _gustMph;
-  double? get gustKph => _gustKph;
+  int get lastUpdatedEpoch => _lastUpdatedEpoch ?? 0;
+  String get lastUpdated => _lastUpdated ?? "";
+  double get tempC => _tempC ?? 0;
+  double get tempF => _tempF ?? 0;
+  int get isDay => _isDay ?? 0;
+  Condition get condition => _condition ?? Condition();
+  double get windMph => _windMph ?? 0;
+  double get windKph => _windKph ?? 0;
+  int get windDegree => _windDegree ?? 0;
+  String get windDir => _windDir ?? "";
+  double get pressureMb => _pressureMb ?? 0;
+  double get pressureIn => _pressureIn ?? 0;
+  double get precipMm => _precipMm ?? 0;
+  double get precipIn => _precipIn ?? 0;
+  int get humidity => _humidity ?? 0;
+  int get cloud => _cloud ?? 0;
+  double get feelslikeC => _feelslikeC ?? 0;
+  double get feelslikeF => _feelslikeF ?? 0;
+  double get visKm => _visKm ?? 0;
+  double get visMiles => _visMiles ?? 0;
+  double get uv => _uv ?? 0;
+  double get gustMph => _gustMph ?? 0;
+  double get gustKph => _gustKph ?? 0;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -212,9 +185,9 @@ class Condition {
   String? _icon;
   int? _code;
 
-  String? get text => _text;
-  String? get icon => _icon;
-  int? get code => _code;
+  String get text => _text ?? "";
+  String get icon => _icon ?? "";
+  int get code => _code ?? 0;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

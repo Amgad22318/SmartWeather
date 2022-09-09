@@ -6,28 +6,27 @@ import 'package:weather_app_algoriza_75/data/source/network/api_result_handler.d
 
 part 'weather_state.dart';
 
-class WeatherCubit extends Cubit<WeatherState> {
+class WeatherCubit extends Cubit<WeatherStates> {
   WeatherCubit() : super(WeatherInitial());
 
   static WeatherCubit get(context) => BlocProvider.of<WeatherCubit>(context);
 
   WeatherResponse weatherResponse = WeatherResponse();
 
-  void getWeatherResponse(String locationName) async {
+  Future<void> getWeatherResponse(String location) async {
     emit(GetWeatherDataLoadingState());
-    ApiResults apiResults =
-        await WeatherRepository().getWeatherData(locationName);
+    ApiResults apiResults = await WeatherRepository().getWeatherData(location);
 
     if (apiResults is ApiSuccess && apiResults.statusCode == 200) {
-      handleResponse(apiResults.data);
+      handleResponse(apiResults.data, location);
     } else if (apiResults is ApiFailure) {
       emit(GetWeatherDataErrorState());
     }
   }
 
-  void handleResponse(json) {
+  void handleResponse(json, String location) {
     var response = WeatherResponse.fromJson(json);
     weatherResponse = response;
-    emit(GetWeatherDataSuccessState());
+    emit(GetWeatherDataSuccessState(location));
   }
 }

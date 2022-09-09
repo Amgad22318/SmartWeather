@@ -89,8 +89,10 @@ flutter:
   # example:
   # fonts:
   assets:
+    - assets/
     - assets/image/
     - assets/icons/
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

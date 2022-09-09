@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:weather_app_algoriza_75/constants/screens.dart' as screens;
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weather_cubit.dart';
+import 'package:weather_app_algoriza_75/constants/screens.dart' as screens;
 
 import '../../../data/source/local/my_shared_preferences.dart';
 import '../../../data/source/local/my_shared_preferences_keys.dart';
@@ -35,11 +35,16 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeIn,
     );
 
-    Timer(const Duration(milliseconds: 3000), () {
+    Timer(const Duration(milliseconds: 3000), () async {
       if (MySharedPreferences.getBoolean(key: MySharedKeys.firstTimeLocation) ==
           true) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(screens.HOME_SCREEN, (route) => false);
+        await WeatherCubit.get(context)
+            .getWeatherResponse(MySharedPreferences.getString(
+                key: MySharedKeys.currentWeatherLocation))
+            .then((value) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(screens.HOME_SCREEN, (route) => false);
+        });
       } else {
         Navigator.of(context).pushNamedAndRemoveUntil(
             screens.PICK_LOCATION_SCREEN, (route) => false);

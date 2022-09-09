@@ -26,14 +26,16 @@ class DefaultMap extends StatelessWidget {
     this.myLocationButtonEnabled = true,
     this.mapType = MapType.normal,
     this.zoomControlsEnabled = true,
-    this.zoomGesturesEnabled = true, this.padding=const EdgeInsets.all(0), this.gestureRecognizers= const   {},
+    this.zoomGesturesEnabled = true,
+    this.padding = const EdgeInsets.all(0),
+    this.gestureRecognizers = const {},
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      padding:padding ,
-
+      padding: padding,
+      compassEnabled: true,
       zoomGesturesEnabled: zoomGesturesEnabled,
       zoomControlsEnabled: zoomControlsEnabled,
       initialCameraPosition: initialCameraPosition,
@@ -43,7 +45,7 @@ class DefaultMap extends StatelessWidget {
       myLocationEnabled: myLocationEnabled,
       myLocationButtonEnabled: myLocationButtonEnabled,
       mapType: mapType,
-      gestureRecognizers:gestureRecognizers ,
+      gestureRecognizers: gestureRecognizers,
     );
   }
 }

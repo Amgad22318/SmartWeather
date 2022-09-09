@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'constants.dart';
@@ -62,7 +61,7 @@ Color chooseToastColor({required ToastStates state}) {
 //   return '${place.country} ${place.locality}  ${place.subLocality}';
 // }
 
-Future<Position> determinePosition() async {
+Future<Position> locationPermission() async {
   bool serviceEnabled;
   LocationPermission permission;
 
@@ -106,4 +105,8 @@ Future<Position> determinePosition() async {
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   return position;
+}
+
+String changeTempUnit(double tempC, double tempF) {
+  return appTempUnitIsC ? '${tempC}C°' : '${tempF}F°';
 }

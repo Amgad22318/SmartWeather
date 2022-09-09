@@ -1,5 +1,8 @@
 enum MySharedKeys {
   theme,
   language,
-  firstTimeLocation;
+  firstTimeLocation,
+  userWeatherList,
+  currentWeatherLocation,
+  userFavoriteWeatherList
 }

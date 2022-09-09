@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weather_cubit.dart';
@@ -27,6 +28,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     super.initState();
     setState(() {});
   }

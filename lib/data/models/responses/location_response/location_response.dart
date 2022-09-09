@@ -7,33 +7,6 @@ String locationResponseToJson(LocationResponse data) =>
 
 class LocationResponse {
   LocationResponse({
-    Location? location,
-  }) {
-    _location = location;
-  }
-
-  LocationResponse.fromJson(dynamic json) {
-    _location =
-        json['location'] != null ? Location.fromJson(json['location']) : null;
-  }
-  Location? _location;
-
-  Location? get location => _location;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_location != null) {
-      map['location'] = _location?.toJson();
-    }
-    return map;
-  }
-}
-
-Location locationFromJson(String str) => Location.fromJson(json.decode(str));
-String locationToJson(Location data) => json.encode(data.toJson());
-
-class Location {
-  Location({
     String? name,
     String? region,
     String? country,
@@ -55,7 +28,7 @@ class Location {
     _favorite = favorite;
   }
 
-  Location.fromJson(dynamic json) {
+  LocationResponse.fromJson(dynamic json) {
     _name = json['name'];
     _region = json['region'];
     _country = json['country'];
@@ -76,15 +49,15 @@ class Location {
   String? _localtime;
   bool? _favorite;
 
-  String? get name => _name;
-  String? get region => _region;
-  String? get country => _country;
-  double? get lat => _lat;
-  double? get lon => _lon;
-  String? get tzId => _tzId;
-  int? get localtimeEpoch => _localtimeEpoch;
-  String? get localtime => _localtime;
-  bool? get favorite => _favorite;
+  String get name => _name ?? "";
+  String get region => _region ?? "";
+  String get country => _country ?? "";
+  double get lat => _lat ?? 0;
+  double get lon => _lon ?? 0;
+  String get tzId => _tzId ?? "";
+  int get localtimeEpoch => _localtimeEpoch ?? 0;
+  String get localtime => _localtime ?? "";
+  bool get favorite => _favorite ?? false;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

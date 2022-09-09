@@ -18,8 +18,8 @@ class DefaultText extends StatelessWidget {
   const DefaultText({
     Key? key,
     required this.text,
-    this.maxLines,
-    this.color = defaultBlack,
+    this.maxLines = 1,
+    this.color = defaultAppWhiteColor,
     this.textStyle,
     this.textAlign,
     this.textScaleFactor,

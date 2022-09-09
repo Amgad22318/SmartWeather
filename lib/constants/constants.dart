@@ -6,3 +6,7 @@ CameraPosition appInitialCameraPosition = const CameraPosition(
 );
 
 enum ToastStates { SUCCESS, ERROR, WARNING }
+
+bool appTempUnitIsC = true;
+
+String httpSC = 'http:';

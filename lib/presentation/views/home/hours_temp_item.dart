@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+import 'package:weather_app_algoriza_75/constants/constants.dart';
+import 'package:weather_app_algoriza_75/presentation/widgets/default_cached_network_image.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_text.dart';
 
 class HoursTempItem extends StatelessWidget {
@@ -16,13 +19,21 @@ class HoursTempItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        DefaultText(text: time),
-        DefaultText(text: state),
-        DefaultText(text: time),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(top: 2.5.h, bottom: 2.5.h),
+      child: SizedBox(
+        width: 25.w,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DefaultText(text: time),
+            DefaultCachedNetworkImage(
+                imageUrl: '$httpSC$icon', fit: BoxFit.contain),
+            DefaultText(text: state),
+            DefaultText(text: temp.toString()),
+          ],
+        ),
+      ),
     );
   }
 }

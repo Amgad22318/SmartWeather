@@ -14,7 +14,7 @@ class DefaultCachedNetworkImage extends StatelessWidget {
       {Key? key,
       this.height,
       required this.imageUrl,
-      this.width = double.infinity,
+      this.width,
       required this.fit})
       : super(key: key);
 

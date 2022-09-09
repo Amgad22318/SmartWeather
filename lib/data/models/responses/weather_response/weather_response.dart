@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:weather_app_algoriza_75/data/models/responses/current_weather_response/current_weather_response.dart';
-import 'package:weather_app_algoriza_75/data/models/responses/forcast_response/forecast_response.dart';
+import 'package:weather_app_algoriza_75/data/models/responses/forecast_response/forecast_response.dart';
 import '../location_response/location_response.dart';
 
 WeatherResponse weatherResponseFromJson(String str) =>
@@ -37,11 +37,12 @@ class WeatherResponse {
   CurrentWeatherResponse? _current;
   ForecastResponse? _forecast;
 
-  LocationResponse? get location => _location;
+  LocationResponse get location => _location ?? LocationResponse();
 
-  CurrentWeatherResponse? get current => _current;
+  CurrentWeatherResponse get currentWeather =>
+      _current ?? CurrentWeatherResponse();
 
-  ForecastResponse? get forecast => _forecast;
+  ForecastResponse get forecast => _forecast ?? ForecastResponse();
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -55,5 +56,17 @@ class WeatherResponse {
       map['forecast'] = _forecast?.toJson();
     }
     return map;
+  }
+
+  set setCurrentWeather(CurrentWeatherResponse value) {
+    _current = value;
+  }
+
+  set setForecast(ForecastResponse value) {
+    _forecast = value;
+  }
+
+  set setLocation(LocationResponse value) {
+    _location = value;
   }
 }
