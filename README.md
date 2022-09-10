@@ -58,6 +58,7 @@ https://user-images.githubusercontent.com/64033577/189472023-ad2eb0d3-3d58-49b7-
 ### flutter_svg
 ### cached_network_image
 ### sizer
+### geolocator
 
 
 
