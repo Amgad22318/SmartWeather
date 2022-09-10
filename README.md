@@ -1,5 +1,5 @@
 # Weather App Algoriza 75
-
+Weatheer app by using  https://www.weatherapi.com/ Apis, Bloc , MVVM , Responsive Design , Google Maps , Shared preferences
 # App Video
 
 https://user-images.githubusercontent.com/64033577/189472023-ad2eb0d3-3d58-49b7-acdc-7839bf227f8a.mp4
@@ -47,9 +47,17 @@ https://user-images.githubusercontent.com/64033577/189472023-ad2eb0d3-3d58-49b7-
 ![28ae66fe-1b4d-44e5-8224-5b54507eab73](https://user-images.githubusercontent.com/64033577/189472393-d3b0a7ba-cbcb-4869-a29c-835d138ac6d1.jpg)
 
 
-
-
-# App Tools 
+# App Libraries
+shared_preferences 
+Dio 
+syncfusion_flutter_charts 
+flutter_bloc 
+intl 
+google_maps_flutter 
+fluttertoast
+flutter_svg
+cached_network_image
+sizer
 
 
 
