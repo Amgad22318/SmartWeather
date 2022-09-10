@@ -7,6 +7,7 @@ import 'package:weather_app_algoriza_75/constants/constant_methods.dart';
 import 'package:weather_app_algoriza_75/constants/constants.dart';
 import 'package:weather_app_algoriza_75/constants/screens.dart';
 import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_list_response.dart';
+import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
 import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences.dart';
 import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences_keys.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_map.dart';
@@ -65,15 +66,21 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
                   if (state is GetWeatherDataSuccessState) {
                     MySharedPreferences.putBoolean(
                         key: MySharedKeys.firstTimeLocation, value: true);
+
                     MySharedPreferences.putString(
                         key: MySharedKeys.currentWeatherLocation,
-                        value: state.location);
-                    WeatherListResponse userWeatherList = WeatherListResponse();
-                    userWeatherList.weatherResponse
-                        .add(WeatherCubit.get(context).weatherResponse);
+                        value: weatherResponseToJson(state.newWeatherResponse));
+
+                    WeatherCubit weatherCubit = WeatherCubit.get(context);
+
+                    weatherCubit.allWeatherListResponse
+                        .addWeatherResponse(state.newWeatherResponse);
+
                     MySharedPreferences.putString(
                         key: MySharedKeys.userWeatherList,
-                        value: weatherListResponseToJson(userWeatherList));
+                        value: weatherListResponseToJson(
+                            weatherCubit.allWeatherListResponse));
+
                     Navigator.pushNamedAndRemoveUntil(
                         context, HOME_SCREEN, (route) => false);
                   }
@@ -82,7 +89,7 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
                     onPressed: () {
                       if (clickedMarkerLat != null ||
                           clickedMarkerLong != null) {
-                        WeatherCubit.get(context).getWeatherResponse(
+                        WeatherCubit.get(context).getCurrentWeatherResponse(
                             '$clickedMarkerLat,$clickedMarkerLong');
                       } else {
                         showToastMsg(

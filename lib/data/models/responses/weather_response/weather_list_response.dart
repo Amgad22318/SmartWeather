@@ -4,6 +4,7 @@ import 'weather_response.dart';
 
 WeatherListResponse weatherListResponseFromJson(String str) =>
     WeatherListResponse.fromJson(json.decode(str));
+
 String weatherListResponseToJson(WeatherListResponse data) =>
     json.encode(data.toJson());
 
@@ -14,6 +15,11 @@ class WeatherListResponse {
     _weatherResponse = weatherResponse;
   }
 
+  void addWeatherResponse(WeatherResponse value) {
+    _weatherResponse ??= [];
+    _weatherResponse!.add(value);
+  }
+
   WeatherListResponse.fromJson(dynamic json) {
     if (json['weatherResponse'] != null) {
       _weatherResponse = [];
@@ -22,13 +28,16 @@ class WeatherListResponse {
       });
     }
   }
+
   List<WeatherResponse>? _weatherResponse;
+
   WeatherListResponse copyWith({
     List<WeatherResponse>? weatherResponse,
   }) =>
       WeatherListResponse(
         weatherResponse: weatherResponse ?? _weatherResponse,
       );
+
   List<WeatherResponse> get weatherResponse => _weatherResponse ?? [];
 
   Map<String, dynamic> toJson() {

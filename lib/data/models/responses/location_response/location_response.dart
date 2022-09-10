@@ -59,6 +59,10 @@ class LocationResponse {
   String get localtime => _localtime ?? "";
   bool get favorite => _favorite ?? false;
 
+  set setFavorite(bool value) {
+    _favorite = value;
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['name'] = _name;

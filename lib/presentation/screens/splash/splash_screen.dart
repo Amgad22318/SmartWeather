@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weather_cubit.dart';
 import 'package:weather_app_algoriza_75/constants/screens.dart' as screens;
+import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
 
 import '../../../data/source/local/my_shared_preferences.dart';
 import '../../../data/source/local/my_shared_preferences_keys.dart';
@@ -22,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
+  late WeatherCubit weatherCubit;
 
   @override
   void initState() {
@@ -38,9 +40,16 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(const Duration(milliseconds: 3000), () async {
       if (MySharedPreferences.getBoolean(key: MySharedKeys.firstTimeLocation) ==
           true) {
-        await WeatherCubit.get(context)
-            .getWeatherResponse(MySharedPreferences.getString(
-                key: MySharedKeys.currentWeatherLocation))
+        WeatherResponse weatherResponse = weatherResponseFromJson(
+            MySharedPreferences.getString(
+                key: MySharedKeys.currentWeatherLocation));
+        weatherCubit = WeatherCubit.get(context);
+        weatherCubit
+          ..getUserAllWeatherLocation()
+          ..getUserOtherWeatherLocation()
+          ..getUserFavoriteWeatherLocation();
+        await weatherCubit
+            .getCurrentWeatherResponse(weatherResponse.locationLatLong)
             .then((value) {
           Navigator.of(context)
               .pushNamedAndRemoveUntil(screens.HOME_SCREEN, (route) => false);

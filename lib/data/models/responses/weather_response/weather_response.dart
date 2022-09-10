@@ -12,16 +12,20 @@ String weatherResponseToJson(WeatherResponse data) =>
 
 class WeatherResponse {
   WeatherResponse({
+    String? locationLatLong,
     LocationResponse? location,
     CurrentWeatherResponse? current,
     ForecastResponse? forecast,
   }) {
+    _locationLatLong = locationLatLong;
     _location = location;
     _current = current;
     _forecast = forecast;
   }
 
   WeatherResponse.fromJson(dynamic json) {
+    _locationLatLong = json['locationLatLong'];
+
     _location = json['location'] != null
         ? LocationResponse.fromJson(json['location'])
         : null;
@@ -31,6 +35,13 @@ class WeatherResponse {
     _forecast = json['forecast'] != null
         ? ForecastResponse.fromJson(json['forecast'])
         : null;
+  }
+  String? _locationLatLong;
+
+  String get locationLatLong => _locationLatLong ?? "";
+
+  set setLocationLatLong(String value) {
+    _locationLatLong = value;
   }
 
   LocationResponse? _location;
@@ -55,6 +66,8 @@ class WeatherResponse {
     if (_forecast != null) {
       map['forecast'] = _forecast?.toJson();
     }
+    map['locationLatLong'] = _locationLatLong;
+
     return map;
   }
 

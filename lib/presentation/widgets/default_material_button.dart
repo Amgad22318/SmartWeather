@@ -5,7 +5,7 @@ import '../styles/colors.dart';
 class DefaultMaterialButton extends StatelessWidget {
   final bool isUpperCase;
   final double width;
-  final double height;
+  final double? height;
   final double radius;
   final Color background;
   final Color textColor;
@@ -23,13 +23,13 @@ class DefaultMaterialButton extends StatelessWidget {
       required this.onPressed,
       this.text,
       this.width = double.infinity,
-      this.isUpperCase = true,
+      this.isUpperCase = false,
       this.background = defaultAppColor,
       this.radius = 30,
       this.child,
       this.splashColor,
       this.padding,
-      this.height = 50,
+      this.height,
       this.fontSize,
       this.textScaleFactor})
       : super(key: key);
@@ -41,7 +41,7 @@ class DefaultMaterialButton extends StatelessWidget {
       width: width,
       child: MaterialButton(
         padding: padding,
-        elevation: 0,
+        elevation: 1,
         splashColor: splashColor,
         color: background,
         shape: RoundedRectangleBorder(

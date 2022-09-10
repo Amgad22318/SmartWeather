@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weather_cubit.dart';
-import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
+import 'package:weather_app_algoriza_75/constants/screens.dart';
 import 'package:weather_app_algoriza_75/presentation/styles/colors.dart';
+import 'package:weather_app_algoriza_75/presentation/views/home/home_drawer.dart';
 import 'package:weather_app_algoriza_75/presentation/views/home/hours_temp_item.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_text.dart';
 
@@ -36,16 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     weatherCubit = WeatherCubit.get(context);
-    WeatherResponse weatherResponse = weatherCubit.weatherResponse;
+
     final List<ChartData> chartData = List.generate(
-      weatherResponse.forecast.forecastday[0].hour.length,
-      (index) =>
-          ChartData(index, weatherResponse.forecast.forecastday[0].hour[index]),
+      weatherCubit.currentWeatherResponse.forecast.forecastday[0].hour.length,
+      (index) => ChartData(
+          index,
+          weatherCubit
+              .currentWeatherResponse.forecast.forecastday[0].hour[index]),
     );
     return BlocBuilder<WeatherCubit, WeatherStates>(
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
+            drawer: HomeDrawer(),
             backgroundColor: backgroundColor,
             body: NotificationListener<ScrollNotification>(
                 onNotification: (notification) {
@@ -71,12 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   slivers: [
                     SliverAppBar(
                         scrolledUnderElevation: 30.h,
-                        leading: DefaultIconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.menu,
-                              size: 20.sp,
-                            )),
+                        leading: Builder(builder: (context) {
+                          return DefaultIconButton(
+                              onPressed: () {
+                                Scaffold.of(context).openDrawer();
+                              },
+                              icon: Icon(
+                                Icons.menu,
+                                size: 20.sp,
+                              ));
+                        }),
                         backgroundColor: backgroundColor,
                         toolbarHeight: 10.h,
                         expandedHeight: 33.h,
@@ -98,12 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   DefaultText(
                                     text:
-                                        '${changeTempUnit(weatherResponse.forecast.forecastday[0].day.maxtempC, weatherResponse.forecast.forecastday[0].day.maxtempF)} / ${changeTempUnit(weatherResponse.forecast.forecastday[0].day.mintempC, weatherResponse.forecast.forecastday[0].day.mintempF)} Feels Like ${changeTempUnit(weatherResponse.currentWeather.feelslikeC, weatherResponse.currentWeather.feelslikeF)}',
+                                        '${changeTempUnit(weatherCubit.currentWeatherResponse.forecast.forecastday[0].day.maxtempC, weatherCubit.currentWeatherResponse.forecast.forecastday[0].day.maxtempF)} / ${changeTempUnit(weatherCubit.currentWeatherResponse.forecast.forecastday[0].day.mintempC, weatherCubit.currentWeatherResponse.forecast.forecastday[0].day.mintempF)} Feels Like ${changeTempUnit(weatherCubit.currentWeatherResponse.currentWeather.feelslikeC, weatherCubit.currentWeatherResponse.currentWeather.feelslikeF)}',
                                     fontSize: 12.sp,
                                   ),
                                   DefaultText(
                                     text:
-                                        '${weatherResponse.currentWeather.condition.text}, ${DateFormat('hh:mm a').format(DateTime.parse(weatherResponse.currentWeather.lastUpdated))}',
+                                        '${weatherCubit.currentWeatherResponse.currentWeather.condition.text}, ${DateFormat('hh:mm a').format(DateTime.parse(weatherCubit.currentWeatherResponse.currentWeather.lastUpdated))}',
                                     fontSize: 12.sp,
                                   ),
                                 ]),
@@ -114,14 +122,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               Row(
                                 children: [
                                   DefaultText(
-                                    text:
-                                        '${changeTempUnit(weatherResponse.currentWeather.tempC, weatherResponse.currentWeather.tempF)}',
+                                    text: changeTempUnit(
+                                        weatherCubit.currentWeatherResponse
+                                            .currentWeather.tempC,
+                                        weatherCubit.currentWeatherResponse
+                                            .currentWeather.tempF),
                                     fontSize: 30.sp,
                                   ),
                                   const Spacer(),
                                   DefaultCachedNetworkImage(
                                     imageUrl: httpSC +
-                                        weatherResponse
+                                        weatherCubit.currentWeatherResponse
                                             .currentWeather.condition.icon,
                                     fit: BoxFit.fill,
                                     height: 10.h,
@@ -130,12 +141,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 children: [
-                                  DefaultText(
-                                    text: weatherResponse.location.name,
-                                    fontSize: 16.sp,
+                                  Flexible(
+                                    child: DefaultText(
+                                      text: weatherCubit
+                                          .currentWeatherResponse.location.name,
+                                      fontSize: 16.sp,
+                                    ),
                                   ),
                                   DefaultIconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, PICK_LOCATION_SCREEN);
+                                      },
                                       icon: Icon(
                                         Icons.location_pin,
                                         size: 15.sp,
@@ -162,29 +179,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 children: List.generate(
-                                    weatherResponse
-                                        .forecast.forecastday[0].hour.length,
+                                    weatherCubit.currentWeatherResponse.forecast
+                                        .forecastday[0].hour.length,
                                     (index) => HoursTempItem(
-                                        time:
-                                            '${DateFormat('hh:mm a').format(DateTime.parse(weatherResponse.forecast.forecastday[0].hour[index].time))}',
+                                        time: DateFormat('hh:mm a').format(DateTime.parse(weatherCubit
+                                            .currentWeatherResponse
+                                            .forecast
+                                            .forecastday[0]
+                                            .hour[index]
+                                            .time)),
                                         temp: changeTempUnit(
-                                            weatherResponse
+                                            weatherCubit
+                                                .currentWeatherResponse
                                                 .forecast
                                                 .forecastday[0]
                                                 .hour[index]
                                                 .tempC,
-                                            weatherResponse
+                                            weatherCubit
+                                                .currentWeatherResponse
                                                 .forecast
                                                 .forecastday[0]
                                                 .hour[index]
                                                 .tempF),
-                                        icon: weatherResponse
+                                        icon: weatherCubit
+                                            .currentWeatherResponse
                                             .forecast
                                             .forecastday[0]
                                             .hour[index]
                                             .condition
                                             .icon,
-                                        state: weatherResponse
+                                        state: weatherCubit
+                                            .currentWeatherResponse
                                             .forecast
                                             .forecastday[0]
                                             .hour[index]
@@ -204,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   series: <ChartSeries<ChartData, int>>[
                                     LineSeries<ChartData, int>(
                                         dataSource: chartData,
-                                        markerSettings: MarkerSettings(
+                                        markerSettings: const MarkerSettings(
                                           isVisible: true,
                                         ),
                                         xValueMapper: (ChartData data, _) =>
@@ -237,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class ChartData {
   ChartData(this.x, this.y);
+
   final int x;
   final Hour y;
 }

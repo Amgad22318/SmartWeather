@@ -8,11 +8,27 @@ class WeatherInitial extends WeatherStates {}
 class GetWeatherDataLoadingState extends WeatherStates {}
 
 class GetWeatherDataSuccessState extends WeatherStates {
-  final String location;
+  final WeatherResponse newWeatherResponse;
 
-  GetWeatherDataSuccessState(this.location);
+  GetWeatherDataSuccessState(this.newWeatherResponse);
 }
 
-class GetWeatherDataEmptyState extends WeatherStates {}
-
 class GetWeatherDataErrorState extends WeatherStates {}
+
+class GetTempWeatherDataLoadingState extends WeatherStates {}
+
+class GetTempWeatherDataSuccessState extends WeatherStates {}
+
+class GetTempWeatherDataErrorState extends WeatherStates {}
+
+class GetAllWeatherDataSuccessState extends WeatherStates {}
+
+class GetOtherWeatherDataSuccessState extends WeatherStates {}
+
+class GetFavoriteWeatherDataSuccessState extends WeatherStates {}
+
+class RemoveWeatherDataSuccessState extends WeatherStates {}
+
+class RemoveWeatherDataErrorState extends WeatherStates {}
+
+class ChangeFavoriteState extends WeatherStates {}

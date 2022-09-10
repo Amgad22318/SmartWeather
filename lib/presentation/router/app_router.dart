@@ -6,6 +6,8 @@ import 'package:weather_app_algoriza_75/presentation/screens/home/home_screen.da
 import 'package:weather_app_algoriza_75/presentation/screens/pick_location_screen/pick_location_screen.dart';
 import 'package:weather_app_algoriza_75/presentation/screens/splash/splash_screen.dart';
 
+import '../screens/manage_locations/manage_locations_screen.dart';
+
 class AppRouter {
   late Widget startScreen;
 
@@ -19,6 +21,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case screens.PICK_LOCATION_SCREEN:
         return MaterialPageRoute(builder: (_) => PickLocationScreen());
+      case screens.MANAGE_LOCATIONS_SCREEN:
+        return MaterialPageRoute(builder: (_) => const ManageLocationsScreen());
       default:
         return null;
     }
