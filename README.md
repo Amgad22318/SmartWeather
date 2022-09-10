@@ -48,16 +48,16 @@ https://user-images.githubusercontent.com/64033577/189472023-ad2eb0d3-3d58-49b7-
 
 
 # App Libraries
-shared_preferences 
-Dio 
-syncfusion_flutter_charts 
-flutter_bloc 
-intl 
-google_maps_flutter 
-fluttertoast
-flutter_svg
-cached_network_image
-sizer
+### shared_preferences 
+### Dio 
+### syncfusion_flutter_charts 
+### flutter_bloc 
+### intl 
+### google_maps_flutter 
+### fluttertoast
+### flutter_svg
+### cached_network_image
+### sizer
 
 
 
