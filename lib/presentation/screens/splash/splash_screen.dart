@@ -6,6 +6,7 @@ import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weath
 import 'package:weather_app_algoriza_75/constants/screens.dart' as screens;
 import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
 
+import '../../../constants/constants.dart';
 import '../../../data/source/local/my_shared_preferences.dart';
 import '../../../data/source/local/my_shared_preferences_keys.dart';
 import '../../styles/colors.dart';
@@ -36,7 +37,8 @@ class _SplashScreenState extends State<SplashScreen>
       parent: _controller,
       curve: Curves.easeIn,
     );
-
+    appTempUnitIsC =
+        MySharedPreferences.getBoolean(key: MySharedKeys.tempUnit) ?? true;
     Timer(const Duration(milliseconds: 3000), () async {
       if (MySharedPreferences.getBoolean(key: MySharedKeys.firstTimeLocation) ==
           true) {
@@ -80,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: FadeTransition(
                   opacity: _animation,
                   child: Icon(
-                    Icons.alarm_outlined,
+                    Icons.cloud,
                     size: 75.sp,
                     color: defaultAppColor,
                   )),
@@ -90,8 +92,8 @@ class _SplashScreenState extends State<SplashScreen>
                     text: defaultTextSpan(children: [
               defaultTextSpan(text: 'S', color: defaultAppColor2),
               defaultTextSpan(text: 'mart', color: defaultAppColor),
-              defaultTextSpan(text: 'R', color: defaultAppColor2),
-              defaultTextSpan(text: 'eminder', color: defaultAppColor),
+              defaultTextSpan(text: 'W', color: defaultAppColor2),
+              defaultTextSpan(text: 'eather', color: defaultAppColor),
             ]))),
           ],
         ),

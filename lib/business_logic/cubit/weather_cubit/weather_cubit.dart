@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_algoriza_75/constants/constant_methods.dart';
+import 'package:weather_app_algoriza_75/constants/constants.dart';
 import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_list_response.dart';
 import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
 import 'package:weather_app_algoriza_75/data/repository/weather_repository/weather_repository.dart';
@@ -153,5 +154,25 @@ class WeatherCubit extends Cubit<WeatherStates> {
         value: weatherListResponseToJson(allWeatherListResponse));
 
     emit(RemoveWeatherDataSuccessState());
+  }
+
+  void changeTempUnit() {
+    appTempUnitIsC = !appTempUnitIsC;
+    MySharedPreferences.putBoolean(
+        key: MySharedKeys.tempUnit, value: appTempUnitIsC);
+    emit(ChangeAppTempUnitState());
+  }
+
+  bool isLightTheme = true;
+  void changeAppTheme() {
+    isLightTheme = !isLightTheme;
+    MySharedPreferences.putBoolean(
+        key: MySharedKeys.theme, value: isLightTheme);
+    emit(ChangeAppThemeState());
+  }
+
+  void getAppTheme() {
+    isLightTheme =
+        MySharedPreferences.getBoolean(key: MySharedKeys.theme) ?? true;
   }
 }

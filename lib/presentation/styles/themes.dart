@@ -5,19 +5,36 @@ import 'colors.dart';
 
 class Themes {
   static ThemeData lightTheme = ThemeData(
+      drawerTheme: const DrawerThemeData(backgroundColor: defaultAppColor),
       colorScheme: const ColorScheme.light(
         primary: defaultAppColor,
         secondary: defaultAppColor,
       ),
-      iconTheme: IconThemeData(color: defaultAppWhiteColor),
-      appBarTheme: AppBarTheme(
+      iconTheme: const IconThemeData(color: defaultAppWhiteColor),
+      buttonTheme: const ButtonThemeData(
+        buttonColor: defaultDarkBlue,
+      ),
+      scaffoldBackgroundColor: defaultAppColor,
+      appBarTheme: const AppBarTheme(
+          backgroundColor: defaultAppColor,
           systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      )));
+            statusBarColor: Colors.transparent,
+          )));
+
   static ThemeData darkTheme = ThemeData(
-    colorScheme: const ColorScheme.light(
-      primary: defaultAppColor,
-      secondary: defaultAppColor,
-    ),
-  );
+      drawerTheme: const DrawerThemeData(backgroundColor: defaultDarkBlue),
+      colorScheme: const ColorScheme.light(
+        primary: defaultDarkBlue,
+        secondary: defaultDarkBlue,
+      ),
+      iconTheme: const IconThemeData(color: defaultAppWhiteColor),
+      buttonTheme: const ButtonThemeData(
+        buttonColor: defaultDarkBlue,
+      ),
+      scaffoldBackgroundColor: defaultDarkBlue,
+      appBarTheme: const AppBarTheme(
+          backgroundColor: defaultDarkBlue,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+          )));
 }

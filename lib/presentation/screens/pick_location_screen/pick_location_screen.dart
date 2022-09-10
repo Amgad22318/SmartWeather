@@ -10,6 +10,7 @@ import 'package:weather_app_algoriza_75/data/models/responses/weather_response/w
 import 'package:weather_app_algoriza_75/data/models/responses/weather_response/weather_response.dart';
 import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences.dart';
 import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences_keys.dart';
+import 'package:weather_app_algoriza_75/presentation/styles/colors.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_map.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_material_button.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_text.dart';
@@ -86,6 +87,7 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
                   }
                 },
                 child: DefaultMaterialButton(
+                    background: defaultAppColor,
                     onPressed: () {
                       if (clickedMarkerLat != null ||
                           clickedMarkerLong != null) {

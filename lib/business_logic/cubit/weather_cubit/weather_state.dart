@@ -32,3 +32,9 @@ class RemoveWeatherDataSuccessState extends WeatherStates {}
 class RemoveWeatherDataErrorState extends WeatherStates {}
 
 class ChangeFavoriteState extends WeatherStates {}
+
+class ChangeAppTempUnitState extends WeatherStates {}
+
+class ChangeAppThemeState extends WeatherStates {}
+
+class GetAppThemeState extends WeatherStates {}

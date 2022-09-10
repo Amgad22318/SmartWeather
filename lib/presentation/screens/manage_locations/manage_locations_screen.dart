@@ -21,15 +21,12 @@ class _ManageLocationsScreenState extends State<ManageLocationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: defaultAppColor,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: defaultAppColor,
         elevation: 0,
         title: const DefaultText(
           text: 'Manage Locations',
           fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
         ),
       ),
       body: Padding(

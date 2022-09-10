@@ -16,8 +16,8 @@ class MySharedPreferences {
     await _preferences?.setBool(key.name, value);
   }
 
-  static bool getBoolean({required MySharedKeys key}) {
-    return _preferences?.getBool(key.name) ?? false;
+  static bool? getBoolean({required MySharedKeys key}) {
+    return _preferences?.getBool(key.name);
   }
 
   static void putString({

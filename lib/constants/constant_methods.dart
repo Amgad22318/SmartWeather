@@ -108,5 +108,13 @@ Future<Position> locationPermission() async {
 }
 
 String changeTempUnit(double tempC, double tempF) {
-  return appTempUnitIsC ? '${tempC}C°' : '${tempF}F°';
+  return appTempUnitIsC
+      ? '${tempC.toStringAsFixed(0)}C°'
+      : '${tempF.toStringAsFixed(0)}F°';
+}
+
+extension DateOnlyCompare on DateTime {
+  bool isSameDate(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
 }

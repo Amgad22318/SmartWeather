@@ -17,6 +17,7 @@ class HomeDrawerFavoriteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(20.sp),
       onLongPress: () {
         WeatherCubit.get(context)
             .getCurrentWeatherResponse(weatherResponse.locationLatLong);
@@ -34,9 +35,11 @@ class HomeDrawerFavoriteItem extends StatelessWidget {
                   SizedBox(
                     height: 3.h,
                   ),
-                  DefaultText(
-                      text: weatherResponse.location.name,
-                      color: defaultAppWhiteColor),
+                  Flexible(
+                    child: DefaultText(
+                        text: weatherResponse.location.name,
+                        color: defaultAppWhiteColor),
+                  ),
                 ],
               ),
             ),

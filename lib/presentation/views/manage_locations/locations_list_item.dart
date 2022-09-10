@@ -31,87 +31,93 @@ class _LocationsListItemState extends State<LocationsListItem> {
   Widget build(BuildContext context) {
     return Dismissible(
       key: UniqueKey(),
-      confirmDismiss: (direction) async =>
-          widget.weatherResponse.location.name !=
-          WeatherCubit.get(context).currentWeatherResponse.location.name,
+      confirmDismiss: (direction) async {
+        if (widget.weatherResponse.location.name !=
+            WeatherCubit.get(context).currentWeatherResponse.location.name) {
+          return true;
+        } else {
+          showToastMsg(
+              msg: "Can't remove current weather forcast",
+              toastState: ToastStates.WARNING);
+          return false;
+        }
+      },
       onDismissed: (direction) {
         WeatherCubit.get(context)
           ..removeWeatherItem(widget.weatherResponse)
           ..getUserFavoriteWeatherLocation()
           ..getUserOtherWeatherLocation();
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 1.h),
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 4.w,
-          ),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(18.sp),
-            gradient: LinearGradient(
-              begin: AlignmentDirectional.topStart,
-              end: AlignmentDirectional.bottomEnd,
-              colors: [
-                defaultAppWhiteColor.withOpacity(0.5),
-                defaultAppColor,
-                defaultAppWhiteColor.withOpacity(0.5)
-              ],
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 5,
-                child: DefaultText(
-                  text: widget.weatherResponse.location.name,
-                  fontSize: 12.sp,
-                  overflow: TextOverflow.ellipsis,
-                  color: defaultBlack,
-                ),
-              ),
-              SizedBox(
-                width: 3.w,
-              ),
-              Flexible(
-                flex: 3,
-                child: DefaultCachedNetworkImage(
-                  imageUrl: httpSC +
-                      widget.weatherResponse.currentWeather.condition.icon,
-                  fit: BoxFit.fill,
-                  height: 10.h,
-                ),
-              ),
-              DefaultText(
-                  text:
-                      ' ${changeTempUnit(widget.weatherResponse.currentWeather.tempC, widget.weatherResponse.currentWeather.tempF)}'),
-              Flexible(
-                child: DefaultIconButton(
-                  onPressed: () {
-                    widget.weatherResponse.location.favorite
-                        ? WeatherCubit.get(context)
-                            .removeFavoriteWeather(widget.weatherResponse)
-                        : WeatherCubit.get(context)
-                            .addFavoriteWeather(widget.weatherResponse);
-                    WeatherCubit.get(context)
-                      ..getUserFavoriteWeatherLocation()
-                      ..getUserOtherWeatherLocation();
-                  },
-                  icon: widget.weatherResponse.location.favorite
-                      ? const Icon(
-                          Icons.star,
-                          color: defaultAppWhiteColor,
-                        )
-                      : const Icon(
-                          Icons.star,
-                          color: defaultDarkBlue,
-                        ),
-                ),
-              )
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 1.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 4.w,
+        ),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(18.sp),
+          gradient: LinearGradient(
+            begin: AlignmentDirectional.topStart,
+            end: AlignmentDirectional.bottomEnd,
+            colors: [
+              defaultAppColor2.withOpacity(0.6),
+              defaultAppWhiteColor.withOpacity(0.5),
+              defaultAppWhiteColor.withOpacity(0.3)
             ],
           ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 5,
+              child: DefaultText(
+                text: widget.weatherResponse.location.name,
+                fontSize: 12.sp,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            SizedBox(
+              width: 3.w,
+            ),
+            Flexible(
+              flex: 3,
+              child: DefaultCachedNetworkImage(
+                imageUrl: httpSC +
+                    widget.weatherResponse.currentWeather.condition.icon,
+                fit: BoxFit.fill,
+                height: 10.h,
+              ),
+            ),
+            DefaultText(
+                text:
+                    ' ${changeTempUnit(widget.weatherResponse.currentWeather.tempC, widget.weatherResponse.currentWeather.tempF)}'),
+            Flexible(
+              flex: 2,
+              child: DefaultIconButton(
+                onPressed: () {
+                  widget.weatherResponse.location.favorite
+                      ? WeatherCubit.get(context)
+                          .removeFavoriteWeather(widget.weatherResponse)
+                      : WeatherCubit.get(context)
+                          .addFavoriteWeather(widget.weatherResponse);
+                  WeatherCubit.get(context)
+                    ..getUserFavoriteWeatherLocation()
+                    ..getUserOtherWeatherLocation();
+                },
+                icon: widget.weatherResponse.location.favorite
+                    ? const Icon(
+                        Icons.star,
+                        color: defaultAppWhiteColor,
+                      )
+                    : const Icon(
+                        Icons.star,
+                        color: defaultDarkBlue,
+                      ),
+              ),
+            )
+          ],
         ),
       ),
     );

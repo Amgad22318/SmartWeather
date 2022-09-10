@@ -4,5 +4,6 @@ enum MySharedKeys {
   firstTimeLocation,
   userWeatherList,
   currentWeatherLocation,
-  userFavoriteWeatherList
+  userFavoriteWeatherList,
+  tempUnit
 }

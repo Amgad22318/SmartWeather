@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app_algoriza_75/business_logic/cubit/weather_cubit/weather_cubit.dart';
 import 'package:weather_app_algoriza_75/constants/screens.dart';
-import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences.dart';
 import 'package:weather_app_algoriza_75/presentation/styles/colors.dart';
 import 'package:weather_app_algoriza_75/presentation/views/home/home_drawer_favorite_item.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_icon_button.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/default_material_button.dart';
 import 'package:weather_app_algoriza_75/presentation/widgets/horizontal_divider.dart';
 
-import '../../../data/models/responses/weather_response/weather_response.dart';
 import '../../widgets/default_text.dart';
 import 'home_drawer_other_locations_item.dart';
 
@@ -35,7 +33,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: defaultDarkBlue,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(20.sp),
@@ -59,7 +56,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             ),
                             child: DefaultIconButton(
                               onPressed: () {
-                                MySharedPreferences.clearShared();
+                                Navigator.pushNamed(context, SETTING_SCREEN);
                               },
                               icon: const Icon(Icons.settings_outlined,
                                   color: Colors.white),
@@ -139,7 +136,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         padding:
                             EdgeInsetsDirectional.only(top: 2.h, bottom: 1.h),
                         child: DefaultMaterialButton(
-                          background: defaultAppWhiteColor.withOpacity(0.3),
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, MANAGE_LOCATIONS_SCREEN);

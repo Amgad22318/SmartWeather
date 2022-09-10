@@ -7,7 +7,7 @@ class DefaultMaterialButton extends StatelessWidget {
   final double width;
   final double? height;
   final double radius;
-  final Color background;
+  final Color? background;
   final Color textColor;
   final Color? splashColor;
   final VoidCallback onPressed; // voidCallback = void Function()
@@ -24,7 +24,7 @@ class DefaultMaterialButton extends StatelessWidget {
       this.text,
       this.width = double.infinity,
       this.isUpperCase = false,
-      this.background = defaultAppColor,
+      this.background,
       this.radius = 30,
       this.child,
       this.splashColor,
@@ -43,7 +43,7 @@ class DefaultMaterialButton extends StatelessWidget {
         padding: padding,
         elevation: 1,
         splashColor: splashColor,
-        color: background,
+        color: background ?? defaultAppWhiteColor.withOpacity(0.3),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius))),
         onPressed: onPressed,
