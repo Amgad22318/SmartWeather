@@ -1,10 +1,10 @@
-## Weather App Algoriza 75
+# Weather App Algoriza 75
 
-## App Video
+# App Video
 
 https://user-images.githubusercontent.com/64033577/189472023-ad2eb0d3-3d58-49b7-acdc-7839bf227f8a.mp4
 
-### App photos 
+# App photos 
 ## SplashScren
 ![8b6d18d9-2993-41c0-9bed-e06ad2645ea2](https://user-images.githubusercontent.com/64033577/189472223-eddf9b39-5b27-4d68-ab62-e23dc89d2513.jpg)
 
