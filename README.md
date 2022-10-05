@@ -1,5 +1,6 @@
 # SmartWeather
-Weather app by using  https://www.weatherapi.com/ Apis, Bloc , MVVM , Responsive Design , Google Maps , Shared preferences
+
+SmartWeather.. Weather app by using https://www.weatherapi.com/ apis ,BLoC as state management, Dio for APIs handling, Bloc Design pattern , Google Maps, Shared preferences ,GeoLocator
 
 Algroiza Phase 2 (id 75)
 # App Video
