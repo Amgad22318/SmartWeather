@@ -1,5 +1,6 @@
 # Weather App Algoriza 75
 Weather app by using  https://www.weatherapi.com/ Apis, Bloc , MVVM , Responsive Design , Google Maps , Shared preferences
+
 Algroiza Phase 2 (id 75)
 # App Video
 
