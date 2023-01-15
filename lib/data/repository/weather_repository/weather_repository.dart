@@ -4,7 +4,7 @@ import 'package:weather_app_algoriza_75/data/source/network/my_dio.dart';
 class WeatherRepository {
   Future<ApiResults> getWeatherData(String locationName) async {
     return await MyDio.getData(endPoint: "forecast.json", queryParameters: {
-      "key": "860b3e96ae5d47c9ad9183114220609",
+      "key": "0e9f044c36144953952201855231501",
       "q": locationName,
       "days": 14,
       "aqi": "no",
@@ -13,3 +13,5 @@ class WeatherRepository {
     });
   }
 }
+
+
