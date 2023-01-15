@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_algoriza_75/constants/screens.dart' as screens;
-import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences.dart';
-import 'package:weather_app_algoriza_75/data/source/local/my_shared_preferences_keys.dart';
 import 'package:weather_app_algoriza_75/presentation/screens/home/home_screen.dart';
 import 'package:weather_app_algoriza_75/presentation/screens/pick_location_screen/pick_location_screen.dart';
 import 'package:weather_app_algoriza_75/presentation/screens/setting/setting_screen.dart';
@@ -18,7 +16,7 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => startScreen);
-      case screens.HOME_SCREEN:
+      case screens.SETTING_SCREEN:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case screens.PICK_LOCATION_SCREEN:
         return MaterialPageRoute(builder: (_) => PickLocationScreen());
