@@ -16,7 +16,7 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => startScreen);
-      case screens.SETTING_SCREEN:
+      case screens.HOME_SCREEN:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case screens.PICK_LOCATION_SCREEN:
         return MaterialPageRoute(builder: (_) => PickLocationScreen());
